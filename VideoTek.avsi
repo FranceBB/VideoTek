@@ -1,13 +1,13 @@
 #simple Videoscope by FranceBB
 #special thanks to both magiblot and StainlessS
 #it resembles Tektronix WVR 7020
-#Accepts 8bit clip only. It works internally in 4:2:0 (yv12)
+#Accepts 8bit planar clip only.
 #Accepts up to 8 audio channels
 
 Function VideoTek(clip clp) {
     clp
     nChannels=(HasAudio)?AudioChannels:0                        # ssS, HasAudio = audio_samples_per_second!=0
-    Assert(IsYV12,"VideoTek: source must be yv12 (YUV 4:2:0 8bit)")
+    Assert(IsYV12 || isYV16 || isYV24,"VideoTek: source must be 8bit planar")
     Assert(nChannels<9,"VideoTek: sources with more than 8 audio channels are not supported")
     CSZ = 480                 # Chroma Size box (W & H)
     A_W = 320                 # Audio Box Width
