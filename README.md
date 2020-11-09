@@ -7,4 +7,4 @@ Special thanks to Stainless and magiblot
 
 picture (top left), luma (top right)
 chroma (bottom left), audio channels and Lissajou (bottom right)
-
+Resolution, framerate, BitDepth (bottom left), Timecode (bottom right)
