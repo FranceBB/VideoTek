@@ -17,7 +17,7 @@ Function VideoTek(clip clp) {
     Bpc == 8 ? clp : clp.ConvertBits(bits=8)
     
     #Errors checking
-    Assert(IsYV12 || isYV16 || isYV24, "VideoTek: source must be 8bit planar")
+    Assert(IsYV12 || isYV16 || isYV24, "VideoTek: source must be planar")
     Assert(nChannels<9,"VideoTek: sources with more than 8 audio channels are not supported")
     
     #Main
