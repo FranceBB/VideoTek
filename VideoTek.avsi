@@ -46,7 +46,7 @@ Function VideoTek(clip clp) {
 
     #Displaying Values for Luma (top right)
     Text("0.00V", x=1430.0, y=362.0, size=18)
-    Text("0.77V", x=1430.0, y=20.0, size=18)
+    Text("0.70V", x=1430.0, y=20.0, size=18)
     Text("0.35V", x=1430.0, y=196.0, size=18)
 
     #Displaying TimeCode (bottom right), BitDepth and ColorSpace (bottom left)
