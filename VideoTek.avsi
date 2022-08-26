@@ -1,9 +1,12 @@
-Function VideoTek(clip clp) {
+Function VideoTek(clip clp, String "Mode") {
     clp
     nChannels=(HasAudio)?AudioChannels:0                        # HasAudio = audio_samples_per_second!=0
 
     #Errors checking                                            # ssS: Might as well do at beginning (after errchk, known Planar YUV & < 9 channels)
     Assert(nChannels<9,"VideoTek: sources with more than 8 audio channels are not supported")
+    
+    #Mode
+    Mode = Default(Mode, "SDR")
 
     #Getting info
     #Resolution
@@ -44,10 +47,19 @@ Function VideoTek(clip clp) {
     Overlay(Audio,     x=704-4,               y=396 + (920-396-audio.height) /2)
     Overlay(lissajous, x=700+Audio.Width,     y=396 + (920-396-lissajous.height)  /2)
 
+    
+    if (Mode == "HLG") {
+    
+    #Reference White 75%
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=65.0, size=15, text_color=$0E7F84, utf8=true)
+    Text("0.52V", x=1430.0, y=69.0, size=18)
+    }
+
+    
     #Displaying Values for Luma (top right)
     Text("0.00V", x=1430.0, y=362.0, size=18)
     Text("0.70V", x=1430.0, y=20.0, size=18)
-    Text("0.35V", x=1430.0, y=196.0, size=18)
+    Text("0.35V", x=1430.0, y=192.0, size=18)
 
     #Displaying TimeCode (bottom right), BitDepth and ColorSpace (bottom left)
     Subtitle("TC:", size=18, x=1309, y=896)
