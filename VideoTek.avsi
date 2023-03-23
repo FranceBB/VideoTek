@@ -96,15 +96,15 @@ Function VideoTek(clip clp, String "Mode") {
     A_W = 320                 # Audio Box Width
     A_H = 460                 # Audio Box Height (Audio & Lissajoua)
     L_W = (704+704+6)-700-A_W # Lissajous Width
-    SilentStereo=Last.Blankclip(width=1480, height=920,audio_rate=48000,channels=2,sample_type="Float")
+    SilentStereo=Last.BlankClip(width=1480, height=920,audio_rate=48000,channels=2,sample_type="Float")
     myBlack= (nChannels>0)  ? SilentStereo.AudioDubEx(Last) : SilentStereo.Killaudio
     Stereo = (nChannels>=2) ? Last.GetChannels(1,2) : (nChannels==1) ? MergeChannels(GetChannels(1),GetChannels(1)) : SilentStereo
-    Stereoclp = Last.Blankclip(width=16,height=16).AudioDub(Stereo)  # Histogram(mode="StereoOverlay") requires 2 channel only clp.
+    Stereoclip = Last.BlankClip(width=16,height=16).AudioDub(Stereo)  # Histogram(mode="StereoOverlay") requires 2 channel only clp.
     Picture   = BicubicResize(704, 396)
     luma      = TurnRight.Histogram(mode="classic").TurnLeft.Crop(0,0,0,256).BiCubicResize(704, 396)
     chroma    = Histogram("color2").Crop(Width, 0, 0,256).BilinearResize(CSZ,CSZ)
     Audio     = myBlack.Crop(0,0,A_W,A_H).Histogram(Mode="audiolevels")
-    lissajous = Stereoclp.Histogram(mode="StereoOverlay").BicubicResize(L_W,A_H)
+    lissajous = Stereoclip.Histogram(mode="StereoOverlay").BicubicResize(L_W,A_H)
 
     #Putting the 4 blocks together with a black background
     MyBlack
