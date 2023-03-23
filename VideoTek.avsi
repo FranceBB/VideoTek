@@ -1,4 +1,72 @@
 Function VideoTek(clip clp, String "Mode") {
+    
+    #Check if frame properties are there
+    my_frame_properties = propGetAll(clp)
+    
+    #If there are no frame properties, let's do what we can
+        if (Int(my_frame_properties.ArraySize()) == 0) {
+        
+            #Check Frame Size to set matrix
+            if (clp.Height() <= 576) {
+                    clp = ConvertToYUV444(clp, matrix="PC.601")           
+            }
+
+            else {
+                    clp = ConvertToYUV444(clp, matrix="PC.709")             
+                }
+        }
+                
+        #If there are SOME frame properties, let's try
+        else if (Int(my_frame_properties.ArraySize()) > 0) {
+         
+                #Check if we have Matrix
+                try {
+                        if (propGetInt(clp, "_Matrix") >= 0) {
+        
+                        my_matrix = propGetInt(clp, "_Matrix")
+                        }
+                }
+        
+                catch (property) {
+                       my_matrix = Undefined()
+                       }
+
+                #If we have matrix, we're good
+                if (Defined(my_matrix) == true) {
+             
+                          #BT601 PAL  or BT601 NTSC 
+                          if (my_matrix == 5 || my_matrix == 6) {
+            
+                              clp = ConvertToYUV444(clp, matrix="PC.601")
+                              }
+                          #BT2020   
+                          else if (my_matrix == 9) {
+                          
+                              clp = ConvertToYUV444(clp, matrix="PC.2020")
+                              }
+                              
+                          #if none of the above, we assume BT709
+                          else {
+                              clp = ConvertToYUV444(clp, matrix="PC.709")
+                              }      
+                }                              
+
+                #If we have no matrix
+                else if (Defined(my_matrix) == false) {
+
+                          #Check Frame Size to set matrix
+                          #If SD - BT601
+                          if (clp.Height() <= 576) {
+                                clp = ConvertToYUV444(clp, matrix="PC.601")           
+                              }
+                              
+                          #Otherwise we assume BT709
+                           else if (clp.Height() > 576) {
+                               clp = ConvertToYUV444(clp, matrix="PC.709")             
+                              }
+                }
+          }
+    
     clp
     nChannels=(HasAudio)?AudioChannels:0                        # HasAudio = audio_samples_per_second!=0
 
@@ -16,11 +84,10 @@ Function VideoTek(clip clp, String "Mode") {
     fps=FrameRate()
     #ColorSpace
     colorspace=PixelType()
-
+    
     #Taking care of High bit Depth
     Bpc = BitsPerComponent
-
-    ConvertToYUV444
+    
     (HasAlpha) ? RemoveAlphaPlane : NOP          # ssS: Avoid eg YUVA444 error in VirtualDub2 (OK in PotPlayer but grey screen in VD2 if YUVA)
     ConvertBits(bits=8)                          # ssS: Convert To YUV444, 8 bit, NO ALPHA, support all colorspace input
 
@@ -29,15 +96,15 @@ Function VideoTek(clip clp, String "Mode") {
     A_W = 320                 # Audio Box Width
     A_H = 460                 # Audio Box Height (Audio & Lissajoua)
     L_W = (704+704+6)-700-A_W # Lissajous Width
-    SilentStereo=Last.BlankClip(width=1480, height=920,audio_rate=48000,channels=2,sample_type="Float")
+    SilentStereo=Last.Blankclip(width=1480, height=920,audio_rate=48000,channels=2,sample_type="Float")
     myBlack= (nChannels>0)  ? SilentStereo.AudioDubEx(Last) : SilentStereo.Killaudio
     Stereo = (nChannels>=2) ? Last.GetChannels(1,2) : (nChannels==1) ? MergeChannels(GetChannels(1),GetChannels(1)) : SilentStereo
-    StereoClip = Last.BlankClip(width=16,height=16).AudioDub(Stereo)  # Histogram(mode="StereoOverlay") requires 2 channel only clip.
+    Stereoclp = Last.Blankclip(width=16,height=16).AudioDub(Stereo)  # Histogram(mode="StereoOverlay") requires 2 channel only clp.
     Picture   = BicubicResize(704, 396)
     luma      = TurnRight.Histogram(mode="classic").TurnLeft.Crop(0,0,0,256).BiCubicResize(704, 396)
     chroma    = Histogram("color2").Crop(Width, 0, 0,256).BilinearResize(CSZ,CSZ)
     Audio     = myBlack.Crop(0,0,A_W,A_H).Histogram(Mode="audiolevels")
-    lissajous = StereoClip.Histogram(mode="StereoOverlay").BicubicResize(L_W,A_H)
+    lissajous = Stereoclp.Histogram(mode="StereoOverlay").BicubicResize(L_W,A_H)
 
     #Putting the 4 blocks together with a black background
     MyBlack
