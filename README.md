@@ -56,3 +56,6 @@ In the example it's possible to see how the luma is out of range and soft-highli
 <br>
 <br>
 The HLG Mode will enable the 75% Reference White marker at 0.525V
+<br>
+<br>
+![LEO - SULLA CRESTA DELL ONDA_V4000413](https://user-images.githubusercontent.com/18946343/233964818-8bfc4ec9-f09d-41f8-bd37-34155f846ab0.png)
