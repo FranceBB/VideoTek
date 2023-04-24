@@ -3,6 +3,15 @@ Function VideoTek(clip clp, String "Mode") {
     #Check if frame properties are there
     my_frame_properties = propGetAll(clp)
     
+    #Getting info
+    #Resolution
+    x=Width(clp)
+    y=Height(clp)
+    #Framerate
+    fps=FrameRate(clp)
+    #ColorSpace
+    colorspace=PixelType(clp)
+    
     #If there are no frame properties, let's do what we can
         if (Int(my_frame_properties.ArraySize()) == 0) {
         
@@ -75,15 +84,6 @@ Function VideoTek(clip clp, String "Mode") {
     
     #Mode
     Mode = Default(Mode, "SDR")
-
-    #Getting info
-    #Resolution
-    x=Width()
-    y=Height()
-    #Framerate
-    fps=FrameRate()
-    #ColorSpace
-    colorspace=PixelType()
     
     #Taking care of High bit Depth
     Bpc = BitsPerComponent
