@@ -130,7 +130,15 @@ Function VideoTek(clip clp, String "Mode") {
 
     #Displaying TimeCode (bottom right), BitDepth and ColorSpace (bottom left)
     Subtitle("TC:", size=18, x=1309, y=896)
+    #Adding workaround for fractional framerates
+    Try{
     ShowSMPTE(size=18, x=1383, y=910)
+    my_tc=last
+    }
+    catch(my_tc) {
+    ShowTime(size=18, x=1383, y=910)
+    }
+    
     Subtitle(String(x) + "x" + String(y) + " " + String(fps) + "fps" + " " + String(colorspace) + " " + String(Bpc) + "Bit", size=18, x=11, y=896)
 
     return Last
