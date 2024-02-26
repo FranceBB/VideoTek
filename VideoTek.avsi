@@ -114,12 +114,12 @@ Function VideoTek(clip clp, String "Mode") {
     Overlay(Audio,     x=704-4,               y=396 + (920-396-audio.height) /2)
     Overlay(lissajous, x=700+Audio.Width,     y=396 + (920-396-lissajous.height)  /2)
 
-    
+
     if (Mode == "HLG") {
     
     #Reference White 75%
-    Subtitle("_________________________________________________________________________________________________", x=710.0, y=65.0, size=15, text_color=$0E7F84, utf8=true)
-    Text("0.52V", x=1430.0, y=69.0, size=18)
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=103.0, size=15, text_color=$0E7F84, utf8=true)
+    Text("0.52V", x=1430.0, y=107.0, size=18)
     }
 
     
