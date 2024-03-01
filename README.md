@@ -59,3 +59,23 @@ The HLG Mode will enable the 75% Reference White marker at 0.525V
 <br>
 <br>
 ![LEO - SULLA CRESTA DELL ONDA_V4000413](https://user-images.githubusercontent.com/18946343/233964818-8bfc4ec9-f09d-41f8-bd37-34155f846ab0.png)
+
+**Usage Example 3 (HDR PQ)**
+>#Indexing a video
+>
+>video=LWLibavVideoSource("test_shooting_PQ.mxf")
+>
+>audio=LWLibavAudioSource("test_shooting_PQ.mxf")
+>
+>AudioDub(video, audio)
+>
+>
+>#Calling VideoTek with PQ Mode
+>
+>VideoTek(Mode="PQ")
+
+
+![New File (2)002441](https://github.com/FranceBB/VideoTek/assets/18946343/8879d890-6548-4f67-94bb-e70271802979)
+<br>
+<br>
+The PQ Mode will enable the 58% Reference White marker at 0.406V
