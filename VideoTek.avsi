@@ -121,6 +121,13 @@ Function VideoTek(clip clp, String "Mode") {
     Subtitle("_________________________________________________________________________________________________", x=710.0, y=103.0, size=15, text_color=$0E7F84, utf8=true)
     Text("0.52V", x=1430.0, y=107.0, size=18)
     }
+    
+    if (Mode == "PQ") {
+    
+    #Reference White 58%
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=159.0, size=15, text_color=$0E7F84, utf8=true)
+    Text("0.40V", x=1430.0, y=159.0, size=18)
+    }
 
     
     #Displaying Values for Luma (top right)
