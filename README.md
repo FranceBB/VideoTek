@@ -111,6 +111,7 @@ The nits reference in HLG mode will enable the 0, 100, 200, 400, 600 and 1000 ni
 <br>
 <br>
 <br>
+
 **Usage Example 4 (HDR PQ)**
 >#Indexing a video
 >
