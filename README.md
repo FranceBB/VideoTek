@@ -7,7 +7,7 @@ Special thanks to Stainless and magiblot
 <br>
 **Parameters**
 <br>
-<style>VideoTek(clip clp, String "Mode", String "Type"){color:Blue;}</style>
+VideoTek(clip clp, String "Mode", String "Type")
 <br>
 <br>
 clip = input clip
