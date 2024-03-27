@@ -108,8 +108,9 @@ The HLG Mode will enable the 75% Reference White marker at 0.525V
 <br>
 <br>
 The nits reference in HLG mode will enable the 0, 100, 200, 400, 600 and 1000 nits markers.
-
-
+<br>
+<br>
+<br>
 **Usage Example 4 (HDR PQ)**
 >#Indexing a video
 >
