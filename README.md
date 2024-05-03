@@ -176,4 +176,7 @@ By default, it uses the volts representation, however it's possible to use the n
 >
 >VideoTek(Mode="PQ", type="nits")
 ![New File (80)029489](https://github.com/FranceBB/VideoTek/assets/18946343/e008e111-7fed-4c07-83cd-02792a751a4b)
-
+<br>
+<br>
+<br>
+The nits reference in PQ mode will enable the 0, 203, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000 and 10000 nits markers.
