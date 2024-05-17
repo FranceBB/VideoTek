@@ -1,4 +1,4 @@
-Function VideoTek(clip clp, String "Mode", String "Type") {
+Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed") {
     
     #Check if frame properties are there
     my_frame_properties = propGetAll(clp)
@@ -83,6 +83,8 @@ Function VideoTek(clip clp, String "Mode", String "Type") {
     Mode = Default(Mode, "SDR")
     #Type
     Type = Default(Type, "volts")
+    #Detailed
+    Detailed = Default(Detailed, false)
 
     #Errors checking                                            # ssS: Might as well do at beginning (after errchk, known Planar YUV & < 9 channels)
     Assert(nChannels<9,"VideoTek: sources with more than 8 audio channels are not supported")
@@ -166,7 +168,27 @@ Function VideoTek(clip clp, String "Mode", String "Type") {
     Text("0.70V", x=1430.0, y=20.0, size=18)
     
     }
-    else if (Mode=="PQ" && Type=="nits") {
+    else if (Mode=="PQ" && Type=="nits" && Detailed==false) {
+    
+    #Displaying Values for Luma (top right)
+    #0 nits
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$0E7F84, utf8=true)
+    Subtitle("0        nits", x=1415.0, y=366.0, size=14)
+    #203 nits
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=159.0, size=15, text_color=$0E7F84, utf8=true)
+    Subtitle("203     nits", x=1415.0, y=166.0, size=14)
+    #1000 nits
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=101.0, size=15, text_color=$0E7F84, utf8=true)
+    Subtitle("1000   nits", x=1415.0, y=107.0, size=14)
+    #5000 nits
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=42.0, size=15, text_color=$0E7F84, utf8=true)
+    Subtitle("5000   nits", x=1415.0, y=49.0, size=14)
+    #10000 nits
+    Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
+    Subtitle("10000 nits", x=1415.0, y=22.0, size=14)
+    
+    }
+    else if (Mode=="PQ" && Type=="nits" && Detailed==true) {
     
     #Displaying Values for Luma (top right)
     #0 nits
