@@ -7,7 +7,7 @@ Special thanks to Stainless, magiblot and erazortt.
 <br>
 **Parameters**
 <br>
-VideoTek(clip clp, String "Mode", String "Type")
+VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed")
 <br>
 <br>
 clip = input clip
@@ -34,6 +34,18 @@ sets the display mode for luma
 "volts"
 <br>
 "nits"
+<br>
+<br>
+<br>
+Bool Detailed = false
+<br>
+sets the level of details in the nits visualization
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
 <br>
 <br>
 
@@ -163,6 +175,8 @@ In the example it's possible to see how the reflected light on the leaves is tot
 <br>
 <br>
 By default, it uses the volts representation, however it's possible to use the nits representation as well.
+<br>
+<br>
 >#Indexing a video
 >
 >video=LWLibavVideoSource("test5.mxf")
@@ -174,9 +188,32 @@ By default, it uses the volts representation, however it's possible to use the n
 >
 >#Calling VideoTek with PQ Mode
 >
->VideoTek(Mode="PQ", type="nits")
+>VideoTek(Mode="PQ", Type="nits")
+>
+![UCN15704048832](https://github.com/FranceBB/VideoTek/assets/18946343/69273731-3eab-48d7-b78b-67b01189e181)
+<br>
+<br>
+<br>
+The nits reference in PQ mode will enable the 0, 203, 1000, 5000 and 10000 nits markers.
+<br>
+It's also possible to increase the level of details by making VideoTek display all the 1k nits increments with Detailed=true.
+<br>
+>#Indexing a video
+>
+>video=LWLibavVideoSource("test5.mxf")
+>
+>audio=LWLibavAudioSource("test5.mxf")
+>
+>AudioDub(video, audio)
+>
+>
+>#Calling VideoTek with PQ Mode with Detailed set to true
+>
+>VideoTek(Mode="PQ", Type="nits", Detailed=true)
 ![New File (80)029489](https://github.com/FranceBB/VideoTek/assets/18946343/e008e111-7fed-4c07-83cd-02792a751a4b)
 <br>
 <br>
 <br>
-The nits reference in PQ mode will enable the 0, 203, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000 and 10000 nits markers.
+The nits reference in PQ mode with Detailed=true will enable the 0, 203, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000 and 10000 nits markers.
+<br>
+<br>
