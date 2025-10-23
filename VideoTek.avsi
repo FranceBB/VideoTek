@@ -86,8 +86,8 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed") {
     #Detailed
     Detailed = Default(Detailed, false)
 
-    #Errors checking                                            # ssS: Might as well do at beginning (after errchk, known Planar YUV & < 9 channels)
-    Assert(nChannels<9,"VideoTek: sources with more than 8 audio channels are not supported")
+    #Errors checking                                            # ssS: Might as well do at beginning (after errchk, known Planar YUV & < 13 channels)
+    Assert(nChannels<13,"VideoTek: sources with more than 12 audio channels are not supported")
     
     
     #Taking care of High bit Depth
@@ -284,3 +284,4 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed") {
 
     return Last
 }
+
