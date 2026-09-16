@@ -7,7 +7,7 @@ Special thanks to Stainless, magiblot and erazortt.
 <br>
 **Parameters**
 <br>
-VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed")
+VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool "HiConWave", Bool "ChromaTargets", Bool "LegalChroma", Bool "KeepRange")
 <br>
 <br>
 clip = input clip
@@ -15,7 +15,7 @@ clip = input clip
 <br>
 String Mode = SDR
 <br>
-sets the mode of the source
+Sets the mode of the source
 <br>
 <br>
 "SDR" - Standard Dynamic Range
@@ -28,7 +28,7 @@ sets the mode of the source
 <br>
 String Type = volts
 <br>
-sets the display mode for luma
+Sets the display mode for luma
 <br>
 <br>
 "volts"
@@ -39,7 +39,7 @@ sets the display mode for luma
 <br>
 Bool Detailed = false
 <br>
-sets the level of details in the nits visualization
+Sets the level of details in the nits visualization
 <br>
 <br>
 "true"
@@ -48,6 +48,51 @@ sets the level of details in the nits visualization
 <br>
 <br>
 <br>
+Bool HiConWave = true
+<br> 
+Enables higher contrast waveform display
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+Bool ChromaTargets = true
+<br> 
+Enables 75% chroma targets (supports limited range Rec.601, Rec.709, Rec.2020)
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+Bool LegalChroma = false
+<br> 
+Converts full-range chroma to legal range (16-240). May be useful in some cases.
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+Bool KeepRange = false
+<br> 
+Output range = input range. Default: always output full range 
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+
 
 **Usage Example 1 (SDR)**
 >#Indexing a video
