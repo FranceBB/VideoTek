@@ -1,5 +1,5 @@
-Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", 
-	\ bool "HiConWave", bool "ChromaTargets", bool "LegalChroma", bool "KeepRange") {
+Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool "ExtraInfo", 
+	\ Bool "HiConWave", Bool "ChromaTargets", Bool "LegalChroma", Bool "KeepRange", Bool "IgnoreMatrix") {
 
     #Mode: SDR, HLG, PQ
     Mode = Default(Mode, "SDR")
@@ -7,14 +7,18 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed",
     Type = Default(Type, "volts")
     #Detailed nits (for PQ only)
     Detailed = Default(Detailed, false)
+	#Showcolor matrix and range information (detected or assumed) 
+    ExtraInfo = Default(ExtraInfo, false)
 	#Higher contrast waveform display
-    HiConWave = Default(HiConWave, true)
+    HiConWave = Default(HiConWave, false)
 	#Display 75% chroma targets (supports limited range Rec.601, Rec.709, Rec.2020)
-    ChromaTargets = Default(ChromaTargets, true)
+    ChromaTargets = Default(ChromaTargets, false)
 	#Legalize full-range chroma to 16-240
     LegalChroma = Default(LegalChroma, false)
 	#Output range = input range, otherwise output full range
     KeepRange = Default(KeepRange, false)
+	#Ignore supplied color matrix metadata, assume matrix from the resolution
+    IgnoreMatrix = Default(IgnoreMatrix, false)
 
 	#------------------------------------------------------------
 
@@ -55,7 +59,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed",
 
 	assumedMatrix = ""
 	#If matrix is unspecified (also ignore 'rgb' matrix)
-	if (colorMatrix == 0 || colorMatrix == 2 || colorMatrix == 3 || colorMatrix > 10) {
+	if (IgnoreMatrix || colorMatrix == 0 || colorMatrix == 2 || colorMatrix == 3 || colorMatrix > 10) {
 		#Check Frame Size to set matrix
 		#If SD - BT601
 		if (y <= 576) {
@@ -64,7 +68,12 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed",
 			if (y == 240 || (y >= 480 && y <= 486)) {
 				colorMatrix = 6
 			}
-		}                              
+		}
+		#If HDR & UHD - BT2020
+		else if (Bpc >= 10 && (x >= 3840 || y >= 2160)) {
+			clp = ConvertToYUV444(clp, matrix="PC.2020")   
+			colorMatrix = 9
+		}
 		#Otherwise we assume BT709
 		else {
 			clp = ConvertToYUV444(clp, matrix="PC.709")   
@@ -73,7 +82,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed",
 		assumedMatrix = "(assumed)"
 	}
 	else {
-		matrix = ["rgb","709","unspec","","fcc","470bg","170m","240m","ycgco","2020ncl","2020cl"]
+		matrix = ["rgb","709","unspec","unspec","fcc","470bg","170m","240m","ycgco","2020","2020cl"]
 		clp = ConvertToYUV444(clp, matrix=matrix[colorMatrix]+":f")
 	}
 	
@@ -310,13 +319,16 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed",
 		ShowTime(size=18, x=1383, y=910)
     }
 
-	matrixNames = ["RGB","Rec.709","Unspecified matrix","","FCC","Rec.601/BT.470BG",
-		\ "Rec.601/SMPTE170M","SMPTE240M","YCgCo","Rec.2020ncl","Rec.2020cl"]
-	rangeNames = ["Full range","Limited range"]
+	extraString = ""
+	if (ExtraInfo) {
+		matrixNames = ["RGB","Rec.709","Unspecified matrix","","FCC","Rec.601/BT.470BG",
+			\ "Rec.601/SMPTE170M","SMPTE240M","YCgCo","Rec.2020ncl","Rec.2020cl"]
+		rangeNames = ["Full range","Limited range"]
+		extraString = matrixNames[colorMatrix] + assumedMatrix + " " + rangeNames[colorRange] + assumedRange
+	}
 
     Subtitle(String(x) + "x" + String(y) + " " + String(fps) + "fps " + String(colorSpace) + " " + 
-		\ String(Bpc) + "bit " + matrixNames[colorMatrix] + assumedMatrix + " " + rangeNames[colorRange] + 
-		\ assumedRange, size=18, x=11, y=896)
+		\ String(Bpc) + "bit " + extraString, size=18, x=11, y=896)
 
 	propSet("_Matrix", colorMatrix)
 	if (KeepRange==false) {
