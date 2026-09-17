@@ -7,7 +7,7 @@ Special thanks to Stainless, magiblot and erazortt.
 <br>
 **Parameters**
 <br>
-VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool "HiConWave", Bool "ChromaTargets", Bool "LegalChroma", Bool "KeepRange")
+VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool "ExtraInfo", Bool "HiConWave", Bool "ChromaTargets", Bool "LegalChroma", Bool "KeepRange", Bool "IgnoreMatrix")
 <br>
 <br>
 clip = input clip
@@ -48,7 +48,18 @@ Sets the level of details in the nits visualization
 <br>
 <br>
 <br>
-Bool HiConWave = true
+Bool ExtraInfo = false
+<br>
+Displays additional color matrix and range information
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+Bool HiConWave = false
 <br> 
 Enables higher contrast waveform display
 <br>
@@ -59,7 +70,7 @@ Enables higher contrast waveform display
 <br>
 <br>
 <br>
-Bool ChromaTargets = true
+Bool ChromaTargets = false
 <br> 
 Enables 75% chroma targets (supports limited range Rec.601, Rec.709, Rec.2020)
 <br>
@@ -84,6 +95,17 @@ Converts full-range chroma to legal range (16-240). May be useful in some cases.
 Bool KeepRange = false
 <br> 
 Output range = input range. Default: always output full range 
+<br>
+<br>
+"true"
+<br>
+"false"
+<br>
+<br>
+<br>
+Bool IgnoreMatrix = false
+<br> 
+Ignore supplied color matrix metadata, assume matrix from the resolution
 <br>
 <br>
 "true"
