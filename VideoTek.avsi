@@ -189,7 +189,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
     Overlay(lissajous, x=700+Audio.Width,     y=396 + (920-396-lissajous.height)/2)
 
 
-    if (Mode=="HLG" && Type=="nits") {    
+    if (Mode=="HLG" && Type=="nits" && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#0 nits
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$0E7F84, utf8=true)
@@ -208,6 +208,27 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Text("600 nits", x=1415.0, y=58.0, size=17)
 		#1000 nits
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
+		Text("1000nits", x=1415.0, y=21.0, size=17)  
+    }
+    else if (Mode=="HLG" && Type=="nits" && HiConWave==true) {    
+		#Displaying Values for Luma (top right)
+		#0 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$00E1FF, utf8=true)
+		Text("0 nits", x=1415.0, y=365.0, size=17)
+		#100 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=166.0, size=15, text_color=$00E1FF, utf8=true)
+		Text("100 nits", x=1415.0, y=173.0, size=17)
+		#200 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=103.0, size=15, text_color=$00E1FF, utf8=true)
+		Text("200 nits", x=1415.0, y=110.0, size=17)
+		#400 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=77.0, size=15, text_color=$00E1FF, utf8=true)
+		Text("400 nits", x=1415.0, y=84.0, size=17)
+		#600 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=51.0, size=15, text_color=$00E1FF, utf8=true)
+		Text("600 nits", x=1415.0, y=58.0, size=17)
+		#1000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$00E1FF, utf8=true)
 		Text("1000nits", x=1415.0, y=21.0, size=17)  
     }
     else if (Mode=="HLG" && Type=="volts" && HiConWave==false) {    
@@ -234,7 +255,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		#Reference top 100%
 		Text("0.70V", x=1422.0, y=20.0, size=18)    
     }
-    else if (Mode=="PQ" && Type=="nits" && Detailed==false) {    
+    else if (Mode=="PQ" && Type=="nits" && Detailed==false && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#0 nits
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$0E7F84, utf8=true)
@@ -252,7 +273,25 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
 		Subtitle("10000 nits", x=1415.0, y=22.0, size=14)    
     }
-    else if (Mode=="PQ" && Type=="nits" && Detailed==true) {    
+    else if (Mode=="PQ" && Type=="nits" && Detailed==false && HiConWave==true) {    
+		#Displaying Values for Luma (top right)
+		#0 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("0        nits", x=1415.0, y=366.0, size=14)
+		#203 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=159.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("203     nits", x=1415.0, y=166.0, size=14)
+		#1000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=101.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("1000   nits", x=1415.0, y=107.0, size=14)
+		#5000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=42.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("5000   nits", x=1415.0, y=49.0, size=14)
+		#10000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("10000 nits", x=1415.0, y=22.0, size=14)    
+    }
+    else if (Mode=="PQ" && Type=="nits" && Detailed==true && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#0 nits
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$0E7F84, utf8=true)
@@ -290,7 +329,46 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		#10000 nits
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
 		Subtitle("10000 nits", x=1415.0, y=22.0, size=8)
-    }    
+    }
+    else if (Mode=="PQ" && Type=="nits" && Detailed==true && HiConWave==true) {    
+		#Displaying Values for Luma (top right)
+		#0 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=359.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("0     nits", x=1415.0, y=369.0, size=8)
+		#203 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=159.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("203    nits", x=1415.0, y=169.0, size=8)
+		#1000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=101.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("1000   nits", x=1415.0, y=111.0, size=8)
+		#2000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=76.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("2000   nits", x=1415.0, y=86.0, size=8)
+		#3000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=61.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("3000   nits", x=1415.0, y=71.0, size=8)
+		#4000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=50.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("4000   nits", x=1415.0, y=60.0, size=8)
+		#5000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=42.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("5000   nits", x=1415.0, y=52.0, size=8)
+		#6000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=36.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("6000   nits", x=1415.0, y=46.0, size=8)
+		#7000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=30.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("7000   nits", x=1415.0, y=40.0, size=8)
+		#8000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=25.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("8000   nits", x=1415.0, y=34.0, size=8)
+		#9000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=20.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("9000   nits", x=1415.0, y=28.0, size=8)
+		#10000 nits
+		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$00E1FF, utf8=true)
+		Subtitle("10000 nits", x=1415.0, y=22.0, size=8)
+    }
     else if (Mode=="PQ" && Type=="volts" && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#Reference bottom 0%
