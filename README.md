@@ -1,7 +1,7 @@
 # VideoTek
 VideoTek is a Tektronix-like waveform monitor for Avisynth written by Francesco Bucciantini (aka FranceBB).
 <br>
-Special thanks to Stainless, magiblot, erazortt and freeman401.
+Special thanks to StainlessS, magiblot, erazortt and freeman401.
 <br>
 <br>
 <br>
