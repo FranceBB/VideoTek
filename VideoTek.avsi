@@ -91,8 +91,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 	(HasAlpha) ? RemoveAlphaPlane : NOP          # ssS: Avoid eg YUVA444 error in VirtualDub2 (OK in PotPlayer but grey screen in VD2 if YUVA) 
 	
 	ConvertBits(8)                          # ssS: Convert To YUV444, 8 bit, NO ALPHA, support all colorspace input
-
-    clplq = ConverttoYV12(chromaresample="point")		# this slightly increases performance
+    clplq = last
 
     nChannels = (HasAudio) ? AudioChannels : 0                        # HasAudio = audio_samples_per_second!=0  
 	#Errors checking
@@ -171,10 +170,13 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
     else {    
 		luma = clplq.TurnRight.Histogram(mode="classic", markers=true).TurnLeft.Crop(0, 0, 0, 256)
     }
+    
+    
 	if (HiConWave) {
 		hcluma = luma.Crop(0,20,0,220).Levels(16, 2.0, 128, 0, 255, coring=false)
 		luma = Overlay(luma, hcluma, 0, 20)
 	}
+	
 
 	luma = luma.BiCubicResize(704, 396)
 
@@ -208,7 +210,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
 		Text("1000nits", x=1415.0, y=21.0, size=17)  
     }
-    else if (Mode=="HLG" && Type=="volts") {    
+    else if (Mode=="HLG" && Type=="volts" && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#Reference bottom 0%
 		Text("0.00V", x=1422.0, y=362.0, size=18)
@@ -216,6 +218,18 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Text("0.35V", x=1422.0, y=192.0, size=18)
 		#Reference White 75%
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=103.0, size=15, text_color=$0E7F84, utf8=true)
+		Text("0.52V", x=1422.0, y=107.0, size=18)
+		#Reference top 100%
+		Text("0.70V", x=1422.0, y=20.0, size=18)    
+    }
+    else if (Mode=="HLG" && Type=="volts" && HiConWave==true) {    
+		#Displaying Values for Luma (top right)
+		#Reference bottom 0%
+		Text("0.00V", x=1422.0, y=362.0, size=18)
+		#Reference middle 50%
+		Text("0.35V", x=1422.0, y=192.0, size=18)
+		#Reference White 75%
+		Subtitle("_________________________________________________________________________", x=710.0, y=103.0, size=20, text_color=$00E1FF, utf8=true)
 		Text("0.52V", x=1422.0, y=107.0, size=18)
 		#Reference top 100%
 		Text("0.70V", x=1422.0, y=20.0, size=18)    
@@ -277,7 +291,7 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=15.0, size=15, text_color=$0E7F84, utf8=true)
 		Subtitle("10000 nits", x=1415.0, y=22.0, size=8)
     }    
-    else if (Mode=="PQ" && Type=="volts") {    
+    else if (Mode=="PQ" && Type=="volts" && HiConWave==false) {    
 		#Displaying Values for Luma (top right)
 		#Reference bottom 0%
 		Text("0.00V", x=1422.0, y=362.0, size=18)
@@ -285,6 +299,18 @@ Function VideoTek(clip clp, String "Mode", String "Type", Bool "Detailed", Bool 
 		Text("0.35V", x=1422.0, y=192.0, size=18)
 		#Reference White 58%
 		Subtitle("_________________________________________________________________________________________________", x=710.0, y=159.0, size=15, text_color=$0E7F84, utf8=true)
+		Text("0.40V", x=1422.0, y=159.0, size=18)
+		#Reference top 100%
+		Text("0.70V", x=1422.0, y=20.0, size=18)    
+    }
+    else if (Mode=="PQ" && Type=="volts" && HiConWave==true) {    
+		#Displaying Values for Luma (top right)
+		#Reference bottom 0%
+		Text("0.00V", x=1422.0, y=362.0, size=18)
+		#Reference middle 50%
+		Text("0.35V", x=1422.0, y=192.0, size=18)
+		#Reference White 58%
+		Subtitle("_________________________________________________________________________", x=710.0, y=159.0, size=20, text_color=$00E1FF, utf8=true)
 		Text("0.40V", x=1422.0, y=159.0, size=18)
 		#Reference top 100%
 		Text("0.70V", x=1422.0, y=20.0, size=18)    
