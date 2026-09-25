@@ -211,6 +211,28 @@ By default, it uses the volts representation, however it's possible to use the n
 The nits reference in HLG mode will enable the 0, 100, 200, 400, 600 and 1000 nits markers.
 <br>
 <br>
+ExtraInfo and ChromaTargets can also be specified
+<br>
+<br>
+
+>#Indexing a video
+>
+>video=LWLibavVideoSource("test5.mxf")
+>
+>audio=LWLibavAudioSource("test5.mxf")
+>
+>AudioDub(video, audio)
+>
+>#Calling VideoTek with HLG Mode and ExtraInfo and ChromaTargets
+>
+>VideoTek(Mode="HLG", Type="nits", ExtraInfo=true, ChromaTargets=true)
+<br>
+When specifying "ExtraInfo" additional information about the detected (or assumed) matrix and range info will be displayed at the bottom.
+<br>
+In the same way, "ChromaTargets" introduces the 75% markers for the chroma.
+<br>
+<img width="1480" height="920" alt="image" src="https://github.com/user-attachments/assets/ae976937-b15b-40f6-a959-cee9c2337630" />
+<br>
 <br>
 
 **Usage Example 3 (HDR PQ)**
@@ -284,3 +306,8 @@ It's also possible to increase the level of details by making VideoTek display a
 The nits reference in PQ mode with Detailed=true will enable the 0, 203, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000 and 10000 nits markers.
 <br>
 <br>
+
+
+<br>
+<br>
+
