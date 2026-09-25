@@ -238,9 +238,9 @@ In the same way, "ChromaTargets" introduces the 75% markers for the chroma.
 **Usage Example 3 (HDR PQ)**
 >#Indexing a video
 >
->video=LWLibavVideoSource("test5.mxf")
+>video=LWLibavVideoSource("test6.mxf")
 >
->audio=LWLibavAudioSource("test5.mxf")
+>audio=LWLibavAudioSource("test6.mxf")
 >
 >AudioDub(video, audio)
 >
@@ -268,9 +268,9 @@ By default, it uses the volts representation, however it's possible to use the n
 <br>
 >#Indexing a video
 >
->video=LWLibavVideoSource("test5.mxf")
+>video=LWLibavVideoSource("test7.mxf")
 >
->audio=LWLibavAudioSource("test5.mxf")
+>audio=LWLibavAudioSource("test7.mxf")
 >
 >AudioDub(video, audio)
 >
@@ -289,9 +289,9 @@ It's also possible to increase the level of details by making VideoTek display a
 <br>
 >#Indexing a video
 >
->video=LWLibavVideoSource("test5.mxf")
+>video=LWLibavVideoSource("test8.mxf")
 >
->audio=LWLibavAudioSource("test5.mxf")
+>audio=LWLibavAudioSource("test8.mxf")
 >
 >AudioDub(video, audio)
 >
