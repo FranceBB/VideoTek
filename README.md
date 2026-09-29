@@ -306,7 +306,29 @@ It's also possible to increase the level of details by making VideoTek display a
 The nits reference in PQ mode with Detailed=true will enable the 0, 203, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000 and 10000 nits markers.
 <br>
 <br>
+ExtraInfo and ChromaTargets can also be specified
+<br>
+<br>
 
+>#Indexing a video
+>
+>video=LWLibavVideoSource("test9.mxf")
+>
+>audio=LWLibavAudioSource("test9.mxf")
+>
+>AudioDub(video, audio)
+>
+>#Calling VideoTek with PQ Mode, Detailed, ExtraInfo and ChromaTargets
+>
+>VideoTek(Mode="PQ", Type="nits", Detailed=true, ExtraInfo=true, ChromaTargets=true)
+<br>
+When specifying "ExtraInfo" additional information about the detected (or assumed) matrix and range info will be displayed at the bottom.
+<br>
+In the same way, "ChromaTargets" introduces the 75% markers for the chroma.
+<br>
+<img width="1480" height="920" alt="image" src="https://github.com/user-attachments/assets/59d472af-51a5-4b42-a063-3db9ec628665" />
+<br>
+<br>
 
 <br>
 <br>
